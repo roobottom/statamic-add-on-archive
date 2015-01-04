@@ -67,38 +67,38 @@ You can use this in the following way (for example).
 
 ```
 {{ years }}
-  	<ul>
-  	{{ entries:listing folder="diary" since="01-01-{ year }" until="31-12-{ year }" }}
-  		<li>{{ title }}</li>
-  	{{ /entries:listing }}
-  	</ul>
-  {{ /years }}
-  ```
+  <ul>
+  {{ entries:listing folder="diary" since="01-01-{ year }" until="31-12-{ year }" }}
+    <li>{{ title }}</li>
+  {{ /entries:listing }}
+  </ul>
+{{ /years }}
+```
   
-  ## {{ archive:months }}
+## {{ archive:months }}
   
-  Things get even more interesting when you throw `{{ archive:months }}` into the mix. 
+Things get even more interesting when you throw `{{ archive:months }}` into the mix. 
   
-  ### Sample Use
+### Sample Use
   
-  ```
-  {{ archive:years folders="diary|gallery" }}
-  <h1>There are {{ total }} entries</h1>
-  {{ years }}
-  	<h2>Entries in {{ year }}</h2>
-  	 {{ archive:months folders="diary|gallery" year="{ year }" }}
-		<ul>
-			{{ months }}
-				<li>{{month_text}} has {{ count }} entries
-				<ul>
-					{{ entries:listing folder="diary|gallery" since="01-{month}-{year}" until="{days_in_month}-{month}-{year}" }}
-						<li>{{ title }}</li>
-					{{ /entries:listing }}
-				</ul>
-				</li>
-			{{ /months }}
-		</ul>
-	  {{ /archive:months }}
-  {{ /years }}
+```
+{{ archive:years folders="diary|gallery" }}
+<h1>There are {{ total }} entries</h1>
+{{ years }}
+  <h2>Entries in {{ year }}</h2>
+  {{ archive:months folders="diary|gallery" year="{ year }" }}
+  <ul>
+    {{ months }}
+      <li>{{month_text}} has {{ count }} entries
+        <ul>
+        {{ entries:listing folder="diary|gallery" since="01-{month}-{year}" until="{days_in_month}-{month}-{year}" }}
+          <li>{{ title }}</li>
+        {{ /entries:listing }}
+        </ul>
+      </li>
+    {{ /months }}
+  </ul>
+  {{ /archive:months }}
+{{ /years }}
 {{ /archive:years }}
 ```
