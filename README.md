@@ -30,12 +30,12 @@ This add-on is a single file, it should live in `_add-ons\archive\archive.php`. 
 
 ### Parameters
 
-`folder` (Required).
+`folders` (Required).
 
-The folder from which to pull entries. 
+The folder(s) from which to pull entries. 
 
 ```
-{{ archive:years folder="blog|photos" }}
+{{ archive:years folders="blog|photos" }}
 ```
 
 `month_filter`
@@ -59,7 +59,7 @@ The total entries retured.
 
 `{{ years }}{{ /years }}`
 
-Loop of each year and, within this tag
+Loop of each year and, within this tag...
 
 `{{ year }}`
 
@@ -102,3 +102,45 @@ Things get even more interesting when you throw `{{ archive:months }}` into the 
 {{ /years }}
 {{ /archive:years }}
 ```
+
+### Parameters
+
+`folders` (Required)
+
+The folder from which you wish to pull entries.
+
+`year` (Required)
+
+The year from which you wish to pull entries.
+
+### Available Variables
+
+`{{ months }} {{ /months }}`
+
+Loop of each month returned, within these...
+
+`{{ month }}``
+
+A numerical representation of the month, for example `04` for April.
+
+`{{ month_text }}`
+
+A full textual representation of the month, for example `April`
+
+`{ year }`
+
+The year returned for re-use.
+
+`{{ days_in_month }}`
+
+How many days are in this month.
+
+`{{ count }}` 
+
+A count of the posts returned in a particular months
+
+## Issues, pull requests, etc.
+
+Please report any issues. Pull requests welcome.
+
+[Jon Roobottom](http://roobottom.com)
