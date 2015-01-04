@@ -127,7 +127,7 @@ A numerical representation of the month, for example `04` for April.
 
 A full textual representation of the month, for example `April`
 
-`{ year }`
+`{{ year }}`
 
 The year returned for re-use.
 
