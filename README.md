@@ -8,28 +8,97 @@ It's fast as it doesn't read the content of files, rather it relies on Statamic'
 
 This add-on is a single file, it should live in `_add-ons\archive\archive.php`. Put it there and it's ready to go.
 
-## Sample Useage
-
-```
-{{ archive:years folder="blog|photos" }}
-  <h2>There are {{ total }} entries for {{year}}</h2>
-  
-{{ /archive:years }}
-```
-
 ## {{ archive:years }}
 
 `{{ archive:years }}` returns a list of years for which you have posts.
 
-### Parameters
-
-`folder` 
-
-The folder from which to pull entries.
+### Sample Use
 
 ```
-{{ archive:years folder="blog|photos" }}
-
+{{ archive:years folders="diary|gallery" }}
+  <h1>There are {{ total }} entries</h1>
+  {{ years }}
+  	<h2>Entries in {{ year }}</h2>
+  	<ul>
+  	{{ entries:listing folder="diary|gallery" since="01-01-{ year }" until="31-12-{ year }" }}
+  		<li>{{ title }}</li>
+  	{{ /entries:listing }}
+  	</ul>
+  {{ /years }}
 {{ /archive:years }}
 ```
 
+### Parameters
+
+`folder` (Required).
+
+The folder from which to pull entries. 
+
+```
+{{ archive:years folder="blog|photos" }}
+```
+
+`month_filter`
+
+Return only years that have posts from a sepecific month. You can specify a month in numerical format, like `03` for March. Or, you can provide the `{ current_date }` variable. The add-on will then extract the current month.
+
+If you use this parameter, you must remeber to specify the correct month in your `{{ entries:listing }}` parameters.
+
+```
+{{ archive:years folder="blog|photos" month_filter="03" }}
+{{ archive:years folder="blog|photos" month_filter="{ current_date }" }}
+```
+
+### Available Variables
+
+These variables are available inside `{{ archive:years}}`
+
+`{{ total }}`
+
+The total entries retured.
+
+`{{ years }}{{ /years }}`
+
+Loop of each year and, within this tag
+
+`{{ year }}`
+
+You can use this in the following way (for example).
+
+```
+{{ years }}
+  	<ul>
+  	{{ entries:listing folder="diary" since="01-01-{ year }" until="31-12-{ year }" }}
+  		<li>{{ title }}</li>
+  	{{ /entries:listing }}
+  	</ul>
+  {{ /years }}
+  ```
+  
+  ## {{ archive:months }}
+  
+  Things get even more interesting when you throw `{{ archive:months }}` into the mix. 
+  
+  ### Sample Use
+  
+  ```
+  {{ archive:years folders="diary|gallery" }}
+  <h1>There are {{ total }} entries</h1>
+  {{ years }}
+  	<h2>Entries in {{ year }}</h2>
+  	 {{ archive:months folders="diary|gallery" year="{ year }" }}
+		<ul>
+			{{ months }}
+				<li>{{month_text}} has {{ count }} entries
+				<ul>
+					{{ entries:listing folder="diary|gallery" since="01-{month}-{year}" until="{days_in_month}-{month}-{year}" }}
+						<li>{{ title }}</li>
+					{{ /entries:listing }}
+				</ul>
+				</li>
+			{{ /months }}
+		</ul>
+	  {{ /archive:months }}
+  {{ /years }}
+{{ /archive:years }}
+```
