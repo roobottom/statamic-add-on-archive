@@ -1,6 +1,6 @@
 # Statamic Archive add-on
 
-A fast archive add-on for Statatmic. This add-on is designed to work alongside the Statamic `{{ entries:lisiting }}` tag to allow you to create a by-date list of your posts. For an example of what's possible, [see it use on my personal site](http://roobottom.com/archives).
+A fast archive add-on for Statatmic. This add-on is designed to work alongside the Statamic `{{ entries:listing }}` tag to allow you to create a by-date list of your posts. For an example of what's possible, [see it use on my personal site](http://roobottom.com/archives).
 
 It's fast as it doesn't read the content of files, rather it relies on Statamic's filename convension to scan your `_content` folders and return your posts in date order.
 
