@@ -86,7 +86,7 @@ Things get even more interesting when you throw `{{ archive:months }}` into the 
 <h1>There are {{ total }} entries</h1>
 {{ years }}
   <h2>Entries in {{ year }}</h2>
-  {{ archive:months folders="diary|gallery" year="{ year }" }}
+  {{ archive:months folders="diary|gallery" year="{ year }" sort=“asc” }}
   <ul>
     {{ months }}
       <li>{{month_text}} has {{ count }} entries
@@ -112,6 +112,11 @@ The folder from which you wish to pull entries.
 `year` (Required)
 
 The year from which you wish to pull entries.
+
+`sort` (Optional) [desc|asc]
+
+If you want to sort the months in descending or ascending order. 
+
 
 ### Available Variables
 

@@ -72,6 +72,7 @@ class Plugin_archive extends Plugin
     $year_params = $this->fetchParam("year");
     $folders = $this->cleanFoldersList($folder_params);
     $filenames = $this->scanDirectory($folders);
+    $sort = $this->fetchParam("sort"); 
     
     
     //extract all years from all filenames
@@ -86,10 +87,15 @@ class Plugin_archive extends Plugin
     //get unique year entries and counts.
     $months = array_unique($months_array);
     rsort($months);
+    
+    if($sort == 'asc') {
+	    $months = array_reverse($months);
+    }
+    
     $counts = array_count_values($months_array);
     $total = array_sum($counts);
     
-    $return_array['total'] = $total + 1;//it's 0 based!
+    $return_array['total'] = $total;
     //create return array
     foreach($months as $month)
     {
